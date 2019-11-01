@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Tab One
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item *ngFor="let item of listaUsuarios" (click)="getUsuario(item.id)">
+      <ion-avatar item-left >
+        <img src="/src/assets/icon/favicon.png">
+      </ion-avatar>
+      <h2>{{item.nombre}}</h2>
+      <p>{{item.id}}</p>
+    </ion-item>
+</ion-content>
