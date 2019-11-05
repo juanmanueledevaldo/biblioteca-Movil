@@ -1,35 +1,35 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
-import { Usuario } from '../Model/usuario';
 import { catchError, tap, map, retry } from 'rxjs/operators';
+import { IUsuario } from '../Interface/usuario';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+
 const apiUrl = "http://localhost:59417/api/usuario";
 @Injectable({
   providedIn: 'root'
 })
-
 export class UsuarioService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {   }
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.log(error);
       return of(result as T);
     };
   }
-  get():Observable<Usuario[]>{
-    return this.http.get<Usuario[]>(apiUrl).pipe(retry(1));
+
+  get(): Observable<IUsuario[]> {
+    return this.http.get<IUsuario[]>(apiUrl).pipe(retry(1));
   }
-  getId(id:number):Observable<Usuario>{
-    return this.http.get<Usuario>(`${apiUrl}/${id}`).pipe(retry(1));
+  getId(id: number): Observable<IUsuario> {
+    return this.http.get<IUsuario>(`${apiUrl}/${id}`).pipe(retry(1));
 
   }
-  post(usuario:Usuario){
+  post(usuario: IUsuario) {
     return this.http.put(apiUrl, usuario).pipe(catchError(this.handleError));
   }
-  update(usuario:Usuario){
+  put(usuario: IUsuario) {
     return this.http.put(`${apiUrl}/${usuario.Id}`, usuario).pipe(catchError(this.handleError));
   }
 

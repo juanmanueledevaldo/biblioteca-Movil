@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../Servicio/usuario.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Usuario } from '../Model/usuario';
 import { LoadingController } from '@ionic/angular';
+import { IUsuario } from '../Interface/usuario';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
-  lista: Usuario[] = [];
+  lista: IUsuario[] = [];
   filtro = "";
   constructor(
     private _usuarioService: UsuarioService,
     private loadingController: LoadingController,
     public router: Router,
-    public route: ActivatedRoute) {}
+    public route: ActivatedRoute) { }
   ngOnInit() {
     this.getLista();
   }
@@ -31,5 +31,5 @@ export class Tab1Page implements OnInit {
         console.log(err);
         loading.dismiss();
       });
-  }
+  } 
 }
